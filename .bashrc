@@ -18,6 +18,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-alias yt-mp3='youtube-dl --config-location ~/.config/youtube-dl/yt-mp3.conf'
-alias youtube-dl='youtube-dl --config-location ~/.config/youtube-dl/yt-dl.conf'
