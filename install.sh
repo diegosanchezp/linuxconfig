@@ -39,9 +39,13 @@ echo "Install programs (Y/N)"
 read INPUT
 if [ $INPUT = "Y" ]; then
 	sudo apt install i3
+
+  # Move i3 configuration 
+  cp -r -i -t ~/.config .config/i3 .config/i3status
 fi
-# Move i3 configuration 
-cp -r -i -t ~/.config .config/i3 .config/i3status
+
+# Move neovim configuration
+cp -r -i -t ~/.config .config/nvim
 # === Install another programs, that can't simply be installed with sudo apt install ==== 
 
 # Youtube-dl
