@@ -15,6 +15,8 @@ fi
 declare -a programs=("neovim" 
                      "nethogs"
                      "htop"
+            		     "gnome-control-center"
+		                 "gnome-tweaks"
                      )
 
 echo "The following programs will be installed"
@@ -32,24 +34,19 @@ if [ $INPUT = "Y" ]; then
   done
 fi
 
-# Install regolith
-echo "Install regolith and it's configurations (Y/N)"
+# Install i3 window manager
+echo "Install programs (Y/N)"
 read INPUT
 if [ $INPUT = "Y" ]; then
-  echo "Installing regolith"
-  sudo add-apt-repository ppa:regolith-linux/release
-  sudo apt install regolith-desktop
-
-  # Append to .bashrc
-  .bashrc >> ~/.bashrc
-
-  echo "Copying regolith configurations"
-  # Copy configurations
-  cp -r -i .config/i3 .config/Xresources ~/.config/regolith
-  cp -r -i .config/youtube-dl .bash_aliases ~/.config
+	sudo apt install i3
 fi
+# Move i3 configuration 
+cp -r -i -t ~/.config .config/i3 .config/i3status
+# === Install another programs, that can't simply be installed with sudo apt install ==== 
 
-#Install another programs
+# Youtube-dl
+sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 
-sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
+# Move youtube-dl config
+cp -r -i -t ~/.config .config/youtube-dl

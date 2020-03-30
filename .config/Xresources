@@ -1,8 +1,0 @@
-Xft.dpi: 105
-i3-wm.bar.position: top
-i3-wm.client.focused.color.background: #88c0d0
-i3-wm.client.focused.color.border: #88c0d0
-i3-wm.client.focused.color.child_border: #88c0d0	
-i3-wm.client.focused.color.indicator: #88c0d0
-i3-wm.client.focused.color.text: #2f343f
-i3xrocks.date.format2: + %A, %d/%m/%Y %H:%M 
