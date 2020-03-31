@@ -128,10 +128,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+apostrophe split h ;; exec gnome-terminal
+bindsym $mod+apostrophe split h 
 
 # split in vertical orientation
-bindsym $mod+slash split v ;; exec gnome-terminal
+bindsym $mod+slash split v 
 
 bindsym $mod+t split toggle
 # enter fullscreen mode for the focused container

@@ -12,17 +12,18 @@ if [ $INPUT = "Y" ]; then
 fi
 
 # ====== Package installation ======
-declare -a programs=("neovim" 
-                     "nethogs"
-                     "htop"
-            		     "gnome-control-center"
+declare -a programs=("neovim" #text editor
+                     "nethogs" #Net top tool grouping bandwidth per process
+                     "htop" #process viewer
+            		     "gnome-control-center" #configure gnome settings
 		                 "gnome-tweaks"
+                     "zathura" #pdf reader
                      )
 
 echo "The following programs will be installed"
-for i in "${programs[@]}"
+for p in "${programs[@]}"
 do
-   echo "$i"
+   echo "$p"
 done
 
 echo "Install programs (Y/N)"
@@ -32,10 +33,26 @@ if [ $INPUT = "Y" ]; then
   do
      sudo apt install "$p"
   done
+
+  # Move neovim configuration
+  cp -r -i -t ~/.config 
+  # === Install another programs, that can't simply be installed with sudo apt install ==== 
+
+  # Youtube-dl
+  sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+
+  sudo chmod a+rx /usr/local/bin/youtube-dl
+
+  # Install ffmpeg, this is needed to convert webm audio files to mp3
+  sudo apt install ffmpeg
+
+  # Move youtube-dl, zathura, nvim config
+  cp -r -i -t ~/.config .config/youtube-dl .config/zathura .config/nvim
+
 fi
 
 # Install i3 window manager
-echo "Install programs (Y/N)"
+echo "Install i3 window manager (Y/N)"
 read INPUT
 if [ $INPUT = "Y" ]; then
 	sudo apt install i3
@@ -44,13 +61,3 @@ if [ $INPUT = "Y" ]; then
   cp -r -i -t ~/.config .config/i3 .config/i3status
 fi
 
-# Move neovim configuration
-cp -r -i -t ~/.config .config/nvim
-# === Install another programs, that can't simply be installed with sudo apt install ==== 
-
-# Youtube-dl
-sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-
-sudo chmod a+rx /usr/local/bin/youtube-dl
-# Move youtube-dl config
-cp -r -i -t ~/.config .config/youtube-dl
