@@ -1,22 +1,24 @@
 #!/bin/bash
 
+# ====== Program execution ====== 
 # chmod 755 install.sh
+
 
 # ====== Run updates ======
 echo "Install updates (Y/N)"
 read INPUT
 if [ $INPUT = "Y" ]; then
-		echo Installing upgrades
+		echo "Installing upgrades"
 		sudo apt-get update
 		sudo apt-get dist-upgrade
 fi
 
 # ====== Package installation ======
-declare -a programs=("neovim" #text editor
-                     "nethogs" #Net top tool grouping bandwidth per process
+declare -a programs=("nethogs" #Net top tool grouping bandwidth per process
                      "htop" #process viewer
+                     "vlc" #video-player
             		     "gnome-control-center" #configure gnome settings
-		                 "gnome-tweaks"
+		                 "gnome-tweaks" #configure gnome with grafical interface
                      "zathura" #pdf reader
                      )
 
@@ -33,31 +35,29 @@ if [ $INPUT = "Y" ]; then
   do
      sudo apt install "$p"
   done
-
-  # Move neovim configuration
-  cp -r -i -t ~/.config 
-  # === Install another programs, that can't simply be installed with sudo apt install ==== 
-
-  # Youtube-dl
-  sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-
-  sudo chmod a+rx /usr/local/bin/youtube-dl
-
-  # Install ffmpeg, this is needed to convert webm audio files to mp3
-  sudo apt install ffmpeg
-
-  # Move youtube-dl, zathura, nvim config
-  cp -r -i -t ~/.config .config/youtube-dl .config/zathura .config/nvim
-
 fi
 
-# Install i3 window manager
-echo "Install i3 window manager (Y/N)"
+echo "Install youtube-dl and configurations(Y/N)"
 read INPUT
 if [ $INPUT = "Y" ]; then
-	sudo apt install i3
+  . install_youtube-dl.sh
+fi
 
-  # Move i3 configuration 
-  cp -r -i -t ~/.config .config/i3 .config/i3status
+echo "Install nodejs (Y/N)"
+read INPUT
+if [ $INPUT = "Y" ]; then
+  . install_node.sh
+fi
+
+echo "Install neovim (Y/N)"
+read INPUT
+if [ $INPUT = "Y" ]; then
+  . install_neovim.sh
+fi
+
+echo "Install i3 window manager with GNOME (Y/N)"
+read INPUT
+if [ $INPUT = "Y" ]; then
+  . install_i3.sh
 fi
 
