@@ -12,7 +12,9 @@ Install the folowing programs  and its configuration files saved on the
 * And probably more that are listed in the `install.sh` script
 
 ## Installation
-Run shell script **install.sh**
+1. Clone the repository
+2. **set global variables** in the file  `globals.sh`
+3. Run shell script **install.sh**
  
 ```
 chmod 755 install.sh
