@@ -5,15 +5,17 @@ Install the folowing programs  and its configuration files saved on the
 .config folder through bash scripts.
 
 * **i3** window manger
-* **neovim** text editor
+* **neovim** text editor its plugings
+* **VsCode** IDE and its extensions
 * **youtube-dl** 
 * **Zathura** pdf reader
 * **VLC** video player
+* **LaTex **  for writing documents
 * And probably more that are listed in the `install.sh` script
 
 ## Installation
 1. Clone the repository
-2. **set global variables** in the file  `globals.sh`
+2. **set global variables** in the file  `globals.sh` for continuos installation, otherwise the program will stop at some point asking you that data.
 3. Run shell script **install.sh**
  
 ```
