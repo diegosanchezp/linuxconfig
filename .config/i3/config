@@ -179,6 +179,9 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
+# Move back and forth from workspaces
+bindsym $mod+Tab workspace next
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
@@ -235,3 +238,5 @@ bar {
 	position top
 
 }
+
+for_window [instance=gnome-screenshot] sticky enable
