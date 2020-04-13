@@ -10,7 +10,7 @@ Install the folowing programs  and its configuration files saved on the
 * **youtube-dl** 
 * **Zathura** pdf reader
 * **VLC** video player
-* **LaTex **  for writing documents
+* **LaTex**  for writing documents
 * And probably more that are listed in the `install.sh` script
 
 ## Installation
@@ -28,6 +28,7 @@ I use vim-plug for managing plugings and coc for autocompletion. After the
 installation run the following command `
 
 `:PlugInstall` for Installing plugings
+
 `:CocInstall` for Installation Coc packages
 
 ----
