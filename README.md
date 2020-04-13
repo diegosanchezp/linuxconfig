@@ -23,6 +23,13 @@ chmod 755 install.sh
 ./install.sh
 ```
 
+## After Neovim installation
+I use vim-plug for managing plugings and coc for autocompletion. After the
+installation run the following command `
+
+`:PlugInstall` for Installing plugings
+`:CocInstall` for Installation Coc packages
+
 ----
 ## Individual program installation
 Run one of the other `*.sh` file but not `install.sh`.
