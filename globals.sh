@@ -15,3 +15,9 @@ NODEURL='https://deb.nodesource.com/setup_12.x' # NodeJs url donwload
 CONDAURL='https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh'
 CONDADIR='/media/diego/Windows' #What dir put miniconda installation file
 
+# Variables for VsCode installation
+DEBPACKAGE='' #path of downloaded .deb package-file
+
+# Variables for LaTex installation
+DLURL='' #url of Tex Live installer, must be tar.gz
+

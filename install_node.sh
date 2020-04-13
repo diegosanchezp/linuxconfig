@@ -6,14 +6,21 @@
 
 # Check if globals variables exists
 if [ -f "globals.sh" ]; then
-  # Include global variables 
 
+  echo "=== Including Global variables ==="
   . globals.sh
-else
-  # Ask via terminal 
 
+fi
+
+# If globals variables does not exists or are not set
+if [ ! -f "globals.sh" ] ||  [ -z $NODEURL ] && [ -z $NODEPATH ]; then   
+  echo "=== Globals.sh not defined or the variables have no value assigned ==="
+  echo "Enter a value for the variables"
+
+  # Ask via terminal 
   read -p "Node url: " NODEURL
   read -p "Node installation path: " NODEPATH
+
 fi
 
 if ! [ -x "$(command -v curl)" ]; then

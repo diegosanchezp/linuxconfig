@@ -1,4 +1,4 @@
-CURRENT_DIR=pwd
+CURRENT_DIR=`pwd`
 if ! [ -x "$(command -v git)" ]; then
   sudo apt install git
 fi

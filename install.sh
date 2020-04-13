@@ -61,3 +61,14 @@ if [ $INPUT = "Y" ]; then
   . install_i3.sh
 fi
 
+echo "Install VsCode IDE (Y/N)"
+read INPUT
+if [ $INPUT = "Y" ]; then
+  . install_vscode.sh
+fi
+
+echo "Install Anaconda (Y/N)"
+read INPUT
+if [ $INPUT = "Y" ]; then
+  . install_pyciencs.sh
+fi

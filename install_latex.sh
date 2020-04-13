@@ -2,7 +2,23 @@
 echo " === You can find text-live installer on \
 https://www.tug.org/texlive/acquire-netinstall.html === "
 
-read -p "Enter http url of Tex Live installer, must be tar.gz: " DLURL
+# Check if globals variables exists
+if [ -f "globals.sh" ]; then
+
+  echo "=== Including Global variables ==="
+  . globals.sh
+
+fi
+
+# If globals variables does not exists or are not set
+if [ ! -f "globals.sh" ] ||  [ -z $DLURL ]; then   
+
+  echo "=== Globals.sh not defined or the variables have no value assigned ==="
+  echo "Enter a value for the variables"
+
+  # Ask via terminal 
+  read -p "Enter http url of Tex Live installer, must be tar.gz: " DLURL
+fi
 
 INSTALLER="$(basename $DLURL)"
 

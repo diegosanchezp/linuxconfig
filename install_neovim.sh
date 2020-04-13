@@ -1,11 +1,11 @@
 # Install dependecies
-if ! [ -x "$(command -v curl)" ]; then
+if [ ! -x "$(command -v curl)" ]; then
   sudo apt install curl
 fi
-echo "Installing neovim"
+echo "=== Installing neovim ==="
 sudo apt install neovim
 
-echo "Install vim-plug (Vim plugin manager)"
+echo "=== Install vim-plug (Vim plugin manager) ==="
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
