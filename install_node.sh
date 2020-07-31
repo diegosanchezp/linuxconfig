@@ -43,8 +43,10 @@ mkdir -v $NODEPATH
 # Configure npm to use the new directory path:
 npm config set prefix $NODEPATH
 
+
+# Resolving EACCES permissions errors when installing packages globally
 # Add this this on .profile [it should not be added before the next line]
-echo "export PATH=$NODEPATH/bin:$PATH" >> .profile
+echo "export PATH=$NODEPATH/bin:$PATH" >> ~/.profile
 
 echo " === Updating system variables === " 
 source ~/.profile
@@ -60,5 +62,6 @@ echo " === Upgrading pnpm === "
 pnpm add -g pnpm
 
 echo " === Installing n [node version manager] === "
-pnpm install -g n
+# https://github.com/tj/n
+npm install -g n
 

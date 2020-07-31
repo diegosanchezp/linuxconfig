@@ -27,10 +27,18 @@ font pango:Ubuntu Regular 16
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+# This config file will use environmental variables such as $BROWSER and $TERMINAL.
+# You can set these variables in ~/.profile or ~/.bash_profile if you have it as below:
+#
+# export TERMINAL="st"
+
+# #---Basic Definitions---# #
+set $term --no-startup-id $TERMINAL
+
 # ==== Dropdown Windows ==== #
 # General dropdown window traits. The order can matter.
 
-# ==== Gnome configuration ====
+# ==== Gnome startup configuration ====
 # https://github.com/i3-gnome/i3-gnome/wiki/Tips-&-Tricks
 
 # GNOME Settings Daemon
@@ -48,19 +56,33 @@ exec --no-startup-id gnome-flashback
 # GNOME lock screen
 exec --no-startup-id /usr/bin/gnome-screensaver dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
 
+# ==== Automatically starting applications====
+
+# Mount HDD drive filesystem
+exec --no-startup-id mount /dev/sdb3 /media/diego/Windows 
+
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-set $focused_colors #fcba03 #1f1f1f #ffffff  
-# ==== Window styles ===
+set $workspace_num_colors #00eaff #02becf #ffffff  
 
-# Remove window title, use borders to see selected window
-for_window [class="^.*"] border pixel 1
+# Open programs on specific workspace at startup
+# If on a new computer delete this 
+exec --no-startup-id i3-msg 'workspace 1; exec --no-startup-id $BROWSER; workspace 1'
+exec --no-startup-id i3-msg 'workspace 3; exec --no-startup-id $BROWSER --new-window https://pomodoro-tracker.com/'
+
+exec --no-startup-id i3-msg 'workspace 3; exec --no-startup-id vlc --no-playlist-autostart ~/Music/Music/WorkMusic.xspf'
+
+exec --no-startup-id i3-msg 'workspace 2; exec $term'
+# ==== Window styles ===
 
 # Change border colors
 
+set $selected_window_color #24deff
+
 # class                 border  backgr. text    indicator child_border
-client.focused          $focused_colors         #fcba03   #fcba03
+client.focused          $workspace_num_colors   #fcba03   $selected_window_color
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
 client.unfocused        #333333 #222222 #888888 #292d2e   #222222
 client.urgent           #fc0303 #fc0303 #fc0303 #fc0303   #fc0303
@@ -68,11 +90,17 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
 
-# === i3bar Styles ===
+# === i3bar gaps===
 
 popup_during_fullscreen smart
+#Disable window title bar
+for_window [class=".*"] border pixel 2
 
-
+gaps inner 10
+# Only enable gaps on a workspace when there is at least one container
+smart_gaps on
+# Activate smart borders (always)
+smart_borders on
 
 # ==== Keybindings ==== 
 
@@ -81,12 +109,17 @@ popup_during_fullscreen smart
 # Launch File Browser
 bindsym $mod+n exec nautilus
 # Launch Web Browser
-bindsym $mod+b exec --no-startup-id firefox
+bindsym $mod+b exec --no-startup-id google-chrome
 # Launch Control Panel
 bindsym $mod+c exec gnome-control-center
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+
+# Default value
+# bindsym $mod+Return exec i3-sensible-terminal
+
+# New value
+bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -233,7 +266,7 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 	colors {
-	  focused_workspace $focused_colors
+	  focused_workspace $workspace_num_colors
 	}
 	position top
 
