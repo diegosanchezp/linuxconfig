@@ -1,10 +1,12 @@
 " ==== Vanilla configuration ==== "
 
-set textwidth=79
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+
+" Tabs are spaces
 set expandtab
+
 set noshiftround
 set autoindent
 syntax on
@@ -19,12 +21,14 @@ augroup vimrc-incsearch-highlight
   autocmd CmdlineEnter /,\? :set hlsearch
   autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
+
 " ==== Vim plug configuration ==== "
 
 " Specify a directory for plugins
 call plug#begin(stdpath('data') . '/plugged')
 
 " ==== YouCompleteMe: a code-completion engine for Vim ====
+
 " Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer --clangd-completer' }
 
 " This option controls for which filetypes should YCM be turned on 
@@ -37,45 +41,13 @@ call plug#begin(stdpath('data') . '/plugged')
 " 			\ "zimbu":1,
 " 			\ "py":1,
 " 			\ }
-" ==== Coc.nvim Intellisense engine for Vim8 & Neovim ==== "
 
+
+" ==== COC.nvim Intellisense engine for Vim8 & Neovim ====
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" To get correct comment highlighting on jsonc files
-autocmd FileType json syntax match Comment +\/\/.\+$+
-
-" Config extensions to install
-" call coc#add_extension('coc-tsserver','coc-json','coc-html','coc-css','coc-svelte','coc-angular','coc-vimtex')
-let g:coc_global_extensions = [
-  \ 'coc-tsserver',
-  \ 'coc-json',
-  \ 'coc-html',
-  \ 'coc-css',
-  \ 'coc-svelte',
-  \ 'coc-angular',
-  \ 'coc-vimtex',
-  \ ]
-
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
-
 " Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -87,14 +59,37 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" ==== END Coc.nvim  configuration ==== "
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" Coc extensions
+" Correct comment highlighting for jsonc files
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" Web development
-Plug 'leafgarland/typescript-vim'
-Plug 'evanleck/vim-svelte'
-" LaTeX
+" ==== HTML Template Literals: Syntax highlighting for html template literals in javascript ====
+
+Plug 'jonsmithers/vim-html-template-literals'
+Plug 'pangloss/vim-javascript'
+
+" reasonable indentation of <style>
+let g:html_indent_style1 = "inc"
+
+" Enable css syntax inside css-tagged template literals (css`...`).
+let g:htl_css_templates = 1
+
+
+" ==== closetag.vim: Auto close (X)HTML tags ====
+
+Plug 'alvan/vim-closetag'
+
+" configure the vim-closetag plugin to work inside html template literals
+
+let g:closetag_filetypes = 'html,xhtml,phtml,javascript,typescript'
+let g:closetag_regions = {
+      \ 'typescript.tsx': 'jsxRegion,tsxRegion,litHtmlRegion',
+      \ 'javascript.jsx': 'jsxRegion,litHtmlRegion',
+      \ 'javascript':     'litHtmlRegion',
+      \ 'typescript':     'litHtmlRegion',
+      \ }
 
 " ==== Vimtex: A modern vim plugin for editing LaTeX files. ====
 Plug 'lervag/vimtex'
@@ -110,5 +105,13 @@ let g:flake8_show_in_file=1  " show marks in the file
 Plug 'tell-k/vim-autopep8'
 autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
 
+" === Dracula: Dark theme for Vim === 
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'wadackel/vim-dogrun'
+runtime ~/.local/share/nvim/plugged/dracula/colors/dracula.vim
 " Initialize plugin system
 call plug#end()
+
+" Set colorscheme after plugin declaration
+"https://github.com/patstockwell/vim-monokai-tasty/issues/2#issuecomment-447676240
+colorscheme dracula
