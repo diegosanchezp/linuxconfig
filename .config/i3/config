@@ -56,6 +56,9 @@ exec --no-startup-id gnome-flashback
 # GNOME lock screen
 exec --no-startup-id /usr/bin/gnome-screensaver dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
 
+# window focus follows your mouse movements as the mouse crosses window borders
+focus_follows_mouse yes
+
 # ==== Automatically starting applications====
 
 # Mount HDD drive filesystem
@@ -92,6 +95,7 @@ client.background       #ffffff
 
 # === i3bar gaps===
 
+# Enable popup during fullscreen
 popup_during_fullscreen smart
 #Disable window title bar
 for_window [class=".*"] border pixel 2
@@ -109,7 +113,7 @@ smart_borders on
 # Launch File Browser
 bindsym $mod+n exec nautilus
 # Launch Web Browser
-bindsym $mod+b exec --no-startup-id google-chrome
+bindsym $mod+b exec --no-startup-id $BROWSER
 # Launch Control Panel
 bindsym $mod+c exec gnome-control-center
 
@@ -124,13 +128,15 @@ bindsym $mod+Return exec $term
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# logout
-bindsym $mod+Control+s exec gnome-session-quit
-# lock the screen
-bindsym $mod+Control+l exec gnome-screensaver-command -l
+# Session // Logout // 
+bindsym $mod+Control+s exec gnome-session-quit --logout
+
+# Session // Lock Screen //
+bindsym $mod+Control+l exec gnome-screensaver-command --lock
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.

@@ -67,5 +67,6 @@
     "vim.highlightedyank.enable": true,
     "vim.handleKeys": {
         "<C-,>": false,
-    }
+    },
+    "editor.tabCompletion": "on"
 }
