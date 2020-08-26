@@ -54,12 +54,16 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
 
 # GNOME lock screen
-exec --no-startup-id /usr/bin/gnome-screensaver dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
-
+exec --no-startup-id /usr/bin/gnome-screensaver 
+# dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
+#
 # window focus follows your mouse movements as the mouse crosses window borders
 focus_follows_mouse yes
 
 # ==== Automatically starting applications====
+
+#transparency on gnome-terminal
+exec --no-startup-id compton
 
 # Mount HDD drive filesystem
 exec --no-startup-id mount /dev/sdb3 /media/diego/Windows 
@@ -77,7 +81,8 @@ exec --no-startup-id i3-msg 'workspace 3; exec --no-startup-id $BROWSER --new-wi
 
 exec --no-startup-id i3-msg 'workspace 3; exec --no-startup-id vlc --no-playlist-autostart ~/Music/Music/WorkMusic.xspf'
 
-exec --no-startup-id i3-msg 'workspace 2; exec $term'
+# Open todo vim file org file
+exec --no-startup-id i3-msg 'workspace 2; exec xdg-open $TODO'
 # ==== Window styles ===
 
 # Change border colors
@@ -106,7 +111,7 @@ smart_gaps on
 # Activate smart borders (always)
 smart_borders on
 
-# ==== Keybindings ==== 
+# ==== Key bindings for launching applications ==== 
 
 # Using some of regolith-linux keybindings
 
@@ -117,6 +122,7 @@ bindsym $mod+b exec --no-startup-id $BROWSER
 # Launch Control Panel
 bindsym $mod+c exec gnome-control-center
 
+bindsym $mod+Shift+s exec gnome-screenshot -i
 # start a terminal
 
 # Default value

@@ -25,7 +25,6 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-
 export PATH=/media/diego/Windows/.npm-global/bin:$PATH
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -50,3 +49,4 @@ export N_PRESERVE_NPM=1
 # gnome-control-center -> Details -> Default Applications
 export BROWSER=$(xdg-settings get default-web-browser | cut -d'.' -f 1)
 export TERMINAL=gnome-terminal
+export TODO='/media/diego/Windows/Users/diego/Documents/orgmode/todos.org'
