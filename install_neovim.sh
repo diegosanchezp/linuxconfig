@@ -6,8 +6,9 @@ echo "=== Installing neovim ==="
 sudo apt install neovim
 
 echo "=== Install vim-plug (Vim plugin manager) ==="
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 #echo "Install YouCompleteMe (A code-completion engine for Vim) dependencies" 
 # Install development tools, CMake, and Python headers (Ubuntu 16.04 and later)
