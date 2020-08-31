@@ -1,0 +1,6 @@
+gnome.terminal.font:	JetBrains Mono 17
+i3-wm.bar.position:	top
+i3-wm.gaps.inner.size:	10
+i3-wm.client.focused.color.child_border: #24deff
+i3-wm.bar.font:	pango:JetBrains Mono Medium 15, Material Design Icons 15
+i3xrocks.date.format2: +%A, %d/%m/%Y %T

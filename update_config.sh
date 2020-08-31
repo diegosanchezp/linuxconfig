@@ -10,5 +10,6 @@ cp ~/.config/Code/User/settings.json .config/Code/User
 cp ~/.config/transmission/settings.json .config/transmission
 cp ~/.config/transmission/shutdown.sh .config/transmission
 
+cp -r ~/.config/regolith .config/
 
-
+cp ~/.config/compton.conf .config/

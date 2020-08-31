@@ -1,0 +1,4 @@
+# Memory
+[memory]
+interval=3
+format2="%used | %available"
