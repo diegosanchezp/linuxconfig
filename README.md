@@ -1,6 +1,7 @@
-# Diego's configuration and programs installation files for Ubuntu
+# Diego's configuration and programs installation files for Ubuntu fresh install
 
 ## What it does?
+
 Install the folowing programs  and its configuration files saved on the
 .config folder through bash scripts.
 
@@ -34,3 +35,19 @@ installation run the following command `
 ----
 ## Individual program installation
 Run one of the other `*.sh` file but not `install.sh`.
+
+## Easier i3 integration with gnome
+
+Install regolith linux
+
+## Troubleshooting
+
+### Disable Nouveau nvidia driver 
+https://askubuntu.com/questions/841876/how-to-disable-nouveau-kernel-driver
+
+### Fix No Sound (Dummy Output) Issue In Ubuntu With SND HDA Intel 
+https://www.linuxuprising.com/2018/06/fix-no-sound-dummy-output-issue-in.html
+
+## Gnome terminal keybindings
+See current-gnome-terminal-key-bindings.png
+![Gnome-terminal-keybindings](https://github.com/diegosanchezp/linuxconfig/blob/master/current-gnome-terminal-key-bindings.png)
