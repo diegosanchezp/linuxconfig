@@ -97,6 +97,9 @@ set_from_resource $rofiTheme rofi.theme /etc/regolith/styles/lascaille/rofi.rasi
 set_from_resource $i3-wm.program.launcher.app i3-wm.program.launcher.app rofi -show drun -theme $rofiTheme
 bindsym $mod+d exec $i3-wm.program.launcher.app
 
+## Launch // Screenshot // <> s ##
+bindsym $mod+s exec gnome-screenshot -i
+
 ## Launch // Command // <><Shift> Space ##
 set_from_resource $i3-wm.program.launcher.cmd i3-wm.program.launcher.cmd rofi -show run -theme $rofiTheme
 bindsym $mod+Shift+space exec $i3-wm.program.launcher.cmd

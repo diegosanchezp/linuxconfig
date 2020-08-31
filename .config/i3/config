@@ -63,11 +63,7 @@ focus_follows_mouse yes
 # ==== Automatically starting applications====
 
 #transparency on gnome-terminal
-exec --no-startup-id compton
-
-# Mount HDD drive filesystem
-exec --no-startup-id mount /dev/sdb3 /media/diego/Windows 
-
+# exec --no-startup-id compton
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -79,10 +75,10 @@ set $workspace_num_colors #00eaff #02becf #ffffff
 exec --no-startup-id i3-msg 'workspace 1; exec --no-startup-id $BROWSER; workspace 1'
 exec --no-startup-id i3-msg 'workspace 3; exec --no-startup-id $BROWSER --new-window https://pomodoro-tracker.com/'
 
-exec --no-startup-id i3-msg 'workspace 3; exec --no-startup-id vlc --no-playlist-autostart ~/Music/Music/WorkMusic.xspf'
+# exec --no-startup-id i3-msg 'workspace 3; exec --no-startup-id vlc --no-playlist-autostart ~/Music/Music/WorkMusic.xspf'
 
 # Open todo vim file org file
-exec --no-startup-id i3-msg 'workspace 2; exec xdg-open $TODO'
+# exec --no-startup-id i3-msg 'workspace 2; exec xdg-open $TODO'
 # ==== Window styles ===
 
 # Change border colors
@@ -132,7 +128,7 @@ bindsym $mod+Shift+s exec gnome-screenshot -i
 bindsym $mod+Return exec $term
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # Session // Logout // 
 bindsym $mod+Control+s exec gnome-session-quit --logout
