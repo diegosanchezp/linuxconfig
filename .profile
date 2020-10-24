@@ -48,6 +48,8 @@ export N_PRESERVE_NPM=1
 
 # Personal use variables
 
+#Add thunderbird to path
+export PATH=${HDD}/Users/diego/Documents/LinuxPrograms/thunderbird:$PATH
 
 # To chance the browser do it in 
 # gnome-control-center -> Details -> Default Applications
@@ -55,3 +57,5 @@ export BROWSER=$(xdg-settings get default-web-browser | cut -d'.' -f 1)
 
 export TERMINAL=gnome-terminal
 export TODO=${HDD}/Users/diego/Documents/orgmode/todos.org
+
+

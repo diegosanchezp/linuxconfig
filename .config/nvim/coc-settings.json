@@ -1,5 +1,4 @@
 {
-  "npm.binPath": "/media/diego/Windows/.npm-global/bin/yarn",
   "tsserver.npm": "/usr/bin/npm",
   "html.autoClosingTags": false,
   "html.filetypes": ["html", "handlebars", "htmldjango"] 

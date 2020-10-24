@@ -91,6 +91,9 @@ bindsym $mod+Return exec /usr/bin/x-terminal-emulator
 ## Launch // Browser // <> w ##
 bindsym $mod+w exec gtk-launch $(xdg-settings get default-web-browser)
 
+## Launch // Vlc // <> v ##
+bindsym $mod+v exec vlc
+
 set_from_resource $rofiTheme rofi.theme /etc/regolith/styles/lascaille/rofi.rasi
 
 ## Launch // Application // <> d ##
@@ -218,6 +221,9 @@ bindsym $mod+a focus parent
 
 ## Modify // Window Layout Mode // <> t ##
 bindsym $mod+t layout toggle tabbed splith splitv
+
+## Modify // Window Layout Split toggle // <> e ##
+bindsym $mod+e layout toggle split
 
 ## Modify // Move Window to Workspace 1 - 10 // <><Shift> 0..9 ##
 bindsym $mod+Shift+1 move container to workspace number $ws1

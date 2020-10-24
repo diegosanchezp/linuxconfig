@@ -51,3 +51,10 @@ https://www.linuxuprising.com/2018/06/fix-no-sound-dummy-output-issue-in.html
 ## Gnome terminal keybindings
 See current-gnome-terminal-key-bindings.png
 ![Gnome-terminal-keybindings](https://github.com/diegosanchezp/linuxconfig/blob/master/current-gnome-terminal-key-bindings.png)
+
+### Disable super+l keybindings
+Gnome steals the super+l keybinding, disable it.
+
+See [issue #184](https://github.com/regolith-linux/regolith-desktop/issues/184)
+
+![disableLockScreen](https://github.com/diegosanchezp/linuxconfig/blob/master/disableLockScreen.png)
