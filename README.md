@@ -58,3 +58,13 @@ Gnome steals the super+l keybinding, disable it.
 See [issue #184](https://github.com/regolith-linux/regolith-desktop/issues/184)
 
 ![disableLockScreen](https://github.com/diegosanchezp/linuxconfig/blob/master/disableLockScreen.png)
+
+### Snap auto fetches updates on startup
+
+Solution: Disable the snap daemon
+[How to stop snapd from auto-updating?](https://askubuntu.com/questions/1045542/how-to-stop-snapd-from-auto-updating)
+
+## Wifi is slow
+Solution: Disable Wi-Fi power management
+
+[Ubuntu 20.04 Network Performance Extremely Slow](https://askubuntu.com/questions/1230525/ubuntu-20-04-network-performance-extremely-slow)
