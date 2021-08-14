@@ -51,11 +51,15 @@ export N_PRESERVE_NPM=1
 #Add thunderbird to path
 export PATH=${HDD}/Users/diego/Documents/LinuxPrograms/thunderbird:$PATH
 
-# To chance the browser do it in 
+# To change the browser do it in 
 # gnome-control-center -> Details -> Default Applications
 export BROWSER=$(xdg-settings get default-web-browser | cut -d'.' -f 1)
 
 export TERMINAL=gnome-terminal
 export TODO=${HDD}/Users/diego/Documents/orgmode/todos.org
+export TODOWORK=${HDD}/Users/diego/Documents/bicimotoccs/notas.org
 
+export SUDO_EDITOR=nvim
 
+# === PYTHON ===
+export PIPENV_VENV_IN_PROJECT=1

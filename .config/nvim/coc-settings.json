@@ -1,5 +1,6 @@
 {
   "tsserver.npm": "/usr/bin/npm",
   "html.autoClosingTags": false,
-  "html.filetypes": ["html", "handlebars", "htmldjango"] 
+  "html.filetypes": ["html", "handlebars", "htmldjango"],
+  "css.validate":false,
 }

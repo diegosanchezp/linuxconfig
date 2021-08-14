@@ -1,5 +1,8 @@
 " ==== Vanilla configuration ==== "
 let mapleader =","
+set listchars=tab:>-,trail:~,extends:>,precedes:<                               
+set list
+set confirm
 
 set tabstop=2
 set shiftwidth=2
@@ -15,10 +18,9 @@ set wrap
 set relativenumber
 set number
 set clipboard+=unnamedplus
+set foldmethod=indent
 filetype on
 
-" Spell-check set to <leader>o, 'o' for 'orthography':
-	map <leader>o :setlocal spell! spelllang=en_us<CR>
 
 " Highlight when searching, then set off after search done
 augroup vimrc-incsearch-highlight
@@ -32,6 +34,53 @@ augroup END
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 	set splitbelow splitright
+
+" ==== Functions ==== "
+" https://vi.stackexchange.com/a/456
+
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+" ==== Commands ==== "
+command! TrimWhitespace call TrimWhitespace()
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" ==== Key mappings ==== "
+" Use ESC to exit insert mode in :term
+tnoremap <Esc> <C-\><C-n>
+
+" To use `ALT+{h,j,k,l}` to navigate windows from any mode: >
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+" Trim whitespaces from file
+:noremap <Leader>t :call TrimWhitespace()<CR>
+
+" Spell-check set to <leader>o, 'o' for 'orthography':
+map <leader>o :setlocal spell! spelllang=en_us<CR>
+
+" Spanish orthography
+map <leader>so :setlocal spell! spelllang=es<CR>
+
+" Prettier formatter for coc.nvim
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+:noremap <leader>l :diffget 1<CR>
+:noremap <leader>r :diffget 3<CR>
 
 " ==== Vim plug configuration ==== "
 
@@ -50,6 +99,10 @@ Plug 'jceb/vim-orgmode'
 " ==== HTML Template Literals: Syntax highlighting for html template literals in javascript ====
 Plug 'jonsmithers/vim-html-template-literals'
 Plug 'pangloss/vim-javascript'
+
+" ====  React JSX syntax highlighting for vim and Typescript  ==== 
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " ==== Vimtex: a modern Vim and neovim filetype plugin for LaTeX files ====
 Plug 'lervag/vimtex'
@@ -101,3 +154,10 @@ let g:htl_all_templates = 1
 let g:tex_flavor = 'latex'
 
 let g:vimtex_view_method = 'zathura'
+
+" ====  React JSX syntax highlighting for vim and Typescript  ====
+" set filetypes as typescriptreact
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+"  Highlighting for large files
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
