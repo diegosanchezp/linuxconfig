@@ -9,11 +9,7 @@ echo "==== Disable compositor, when the compositor is enabled there are lagspike
 
 sudo apt install regolith-compositor-none
 
-echo "==== Move regolith configuration ===="
-cp -r -i -t ~/.config .config/regolith
-
 echo "==== Installing compton for terminal transparency ===="
 sudo apt install compton
 
-echo "==== Move compton configuration ===="
-cp -t -i ~/.config .config/compton.conf
+echo "==== Remember to stow your files, so configuration can be applied !!! ===="

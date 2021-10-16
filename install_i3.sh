@@ -17,5 +17,4 @@ sudo make install
 
 cd $CURRENT_DIR
 
-echo "Move i3 configuration" 
-cp -r -i -t ~/.config .config/i3 .config/i3status
+echo "==== Remember to stow your files, so configuration can be applied !!! ===="
