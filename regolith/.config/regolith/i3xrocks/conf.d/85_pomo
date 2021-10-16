@@ -1,0 +1,3 @@
+[pomo]
+command=pomo status
+interval=1

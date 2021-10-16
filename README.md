@@ -15,6 +15,26 @@ Install the folowing programs  and its configuration files saved on the
 * And probably more that are listed in the `install.sh` script
 
 ## Installation
+### Dotfiles
+
+```sh
+# Simulate first
+stow -nvt ~ */
+
+# Then install
+stow -vt ~ */
+```
+Update dotfiles
+
+```sh
+# Simulate first
+stow --adopt -nvt ~ */
+
+# Then update
+stow --adopt -vt ~ */
+```
+
+### Programs
 1. Clone the repository
 2. **set global variables** in the file  `globals.sh` for continuos installation, otherwise the program will stop at some point asking you that data.
 3. Run shell script **install.sh**

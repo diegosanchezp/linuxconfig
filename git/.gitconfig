@@ -1,0 +1,10 @@
+[user]
+	email = diegosandmg@gmail.com
+	name = Diego Sánchez
+[core]
+	editor = nvim
+[merge]
+	tool = vimdiff
+[alias]
+  opens = !$EDITOR $(git status -uno --porcelain | awk '{print $2}')
+  openc = !$EDITOR $(git diff --name-only HEAD~1)
