@@ -32,10 +32,10 @@ augroup vimrc-incsearch-highlight
 augroup END
 
 " Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow splitright
+set splitbelow splitright
 
 " ==== Functions ==== "
 " https://vi.stackexchange.com/a/456
@@ -48,7 +48,6 @@ endfun
 
 " ==== Commands ==== "
 command! TrimWhitespace call TrimWhitespace()
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " ==== Key mappings ==== "
 " Use ESC to exit insert mode in :term
@@ -77,9 +76,8 @@ map <leader>o :setlocal spell! spelllang=en_us<CR>
 " Spanish orthography
 map <leader>so :setlocal spell! spelllang=es<CR>
 
-" Prettier formatter for coc.nvim
-"vmap <leader>f  <Plug>(coc-format-selected)
-"nmap <leader>f  <Plug>(coc-format-selected)
+" Spanish and dual english orthography
+map <leader>do :setlocal spell! spelllang=en_us,es<CR>
 
 :noremap <leader>l :diffget 1<CR>
 :noremap <leader>r :diffget 3<CR>
@@ -88,11 +86,6 @@ map <leader>so :setlocal spell! spelllang=es<CR>
 
 " Specify a directory for plugins
 call plug#begin(stdpath('data') . '/plugged')
-
-" ==== COC.nvim Intellisense engine for Vim8 & Neovim ====
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-
 
 " ==== closetag.vim: Auto close (X)HTML tags ====
 Plug 'alvan/vim-closetag'
@@ -130,7 +123,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-Plug 'f3fora/cmp-spell'
+Plug  'uga-rosa/cmp-dictionary'
 
 " ====  Modern theme for modern VIMs  ====
 Plug 'ayu-theme/ayu-vim' " or other package manager
@@ -190,6 +183,7 @@ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap <leader>fo <cmd>lua require('telescope.builtin').oldfiles()<cr>
 
+set dictionary+=/usr/share/dict/spanish,/usr/share/dict/words
 " ====  Lua config "
 lua << EOF
 -- Telescope configuration
@@ -318,7 +312,10 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'path' },
-    { name = 'spell' },
+    {
+      name = "dictionary",
+      keyword_length = 2,
+    },
   },
 }
 
