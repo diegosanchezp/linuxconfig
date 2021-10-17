@@ -1,28 +1,25 @@
 # Created by newuser for 5.8
 # Luke's config for the Zoomer Shell
 
-# Find and set branch name var if in git repository.
-function git_branch_name()
-{
-  branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
-  if [[ $branch == "" ]];
-  then
-    :
-  else
-    echo '('$branch')'
-  fi
-}
+## autoload vcs and colors
+autoload -Uz vcs_info
+autoload -U colors && colors
 
-# Enable substitution in the prompt.
-precmd() {
-  psvar[5]=$(git_branch_name)
-}
+# enable only git 
+zstyle ':vcs_info:*' enable git 
 
+# setup a hook that runs before every ptompt. 
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 
-# Enable colors and change prompt:
-autoload -U colors && colors
-PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b%5v "
+# zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
+zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%} )"
+
+# format our main prompt for hostname current folder, and permissions.
+PROMPT="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
+# PROMPT="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
+PROMPT+="\$vcs_info_msg_0_ "
 
 # History in cache directory:
 HISTSIZE=10000
