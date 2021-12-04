@@ -87,3 +87,5 @@ bindkey '^e' edit-command-line
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+alias luamake=/home/diego/.cache/nvim/nlua/sumneko_lua/lua-language-server/3rd/luamake/luamake

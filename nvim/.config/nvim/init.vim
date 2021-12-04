@@ -136,6 +136,13 @@ Plug 'ayu-theme/ayu-vim' " or other package manager
 
 Plug 'glench/vim-jinja2-syntax'
 
+" Lua Development for Neovim.
+Plug 'tjdevries/nlua.nvim'
+
+" plenary: full; complete; entire; absolute; unqualified.
+" All the lua functions I don't want to write twice. 
+Plug 'nvim-lua/plenary.nvim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -190,6 +197,7 @@ nnoremap <leader>fs <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap <leader>fo <cmd>lua require('telescope.builtin').oldfiles()<cr>
 
 set dictionary+=/usr/share/dict/spanish,/usr/share/dict/words
+
 " ====  Lua config "
 lua << EOF
 -- Telescope configuration
@@ -291,6 +299,15 @@ nvim_lsp.html.setup{
   filetypes = { "html", "htmldjango", "jinja.html" },
 }
 
+require('nlua.lsp.nvim').setup(nvim_lsp, {
+  on_attach = on_attach,
+
+  -- Include globals you want to tell the LSP are real :)
+  globals = {
+    -- Colorbuddy
+    "Color", "c", "Group", "g", "s",
+  }
+})
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
