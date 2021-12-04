@@ -107,6 +107,12 @@ Plug 'lervag/vimtex'
 " ==== emmet for vim ====
 Plug 'mattn/emmet-vim'
 
+" ==== Polyglot: A collection of language packs for Vim.
+Plug 'sheerun/vim-polyglot'
+
+" Vim syntax highlighting and indentation for Svelte 3 components. 
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
+
 " Quickstart configurations for the Nvim LSP client
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp-status.nvim'
@@ -268,7 +274,7 @@ local cmp_nvim_lsp = require('cmp_nvim_lsp')
 vim.lsp.set_log_level("debug")
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp', 'svelte', 'tsserver', 'cssls' }
+local servers = { 'pylsp', 'svelte', 'tsserver', 'cssls', 'bashls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -312,10 +318,10 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'path' },
-    {
-      name = "dictionary",
-      keyword_length = 2,
-    },
+    --{
+     -- name = "dictionary",
+      --keyword_length = 2,
+    --},
   },
 }
 
