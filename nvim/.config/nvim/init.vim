@@ -7,7 +7,8 @@ set confirm
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-
+" pywall recomendation
+set termguicolors
 set encoding=utf-8
 
 " Tabs are spaces
@@ -113,6 +114,9 @@ Plug 'sheerun/vim-polyglot'
 " Vim syntax highlighting and indentation for Svelte 3 components. 
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
 
+" === Comment plugin: A comment toggler for Neovim, written in Lua ===
+Plug  'terrortylor/nvim-comment'
+
 " Quickstart configurations for the Nvim LSP client
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp-status.nvim'
@@ -120,16 +124,23 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 " === Snippets plugin ===
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'
 
 " ====  Auto completion Lua plugin for nvim
 Plug 'hrsh7th/nvim-cmp'
+
 " ==== LSP source for nvim-cmp
+Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-Plug  'uga-rosa/cmp-dictionary'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'hrsh7th/cmp-nvim-lua'
+
 
 " ====  Modern theme for modern VIMs  ====
 Plug 'ayu-theme/ayu-vim' " or other package manager
@@ -143,15 +154,32 @@ Plug 'tjdevries/nlua.nvim'
 " All the lua functions I don't want to write twice. 
 Plug 'nvim-lua/plenary.nvim'
 
+" Lean & mean status/tabline for vim that's light as air 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" A vim colorscheme for use with wal
+"Plug 'dylanaraps/wal.vim'
+
+" pywal.nvim is a reimplementation of pywal.vim
+"Plug 'AlphaTechnolog/pywal.nvim', { 'as': 'pywal' }
+
+"
+Plug 'xiyaowong/nvim-transparent', {'as': 'transparent'}
+
 " Initialize plugin system
 call plug#end()
 
-set background=dark
-set termguicolors     " enable true colors support
-let ayucolor="mirage" " for mirage version of theme
+" Set colorscheme
+" colorscheme wal
+
+let ayucolor="dark" " for mirage version of theme
 runtime colors/ayu.vim
-let s:fg_comment = "#FFFFFF"
+highlight Normal ctermfg=black ctermbg=black
+" let s:fg_comment = "#FFFFFF"
+
+"colorscheme ayu
 " ==== closetag.vim: Auto close (X)HTML tags ====
+
 
 " configure the vim-closetag plugin to work inside html template literals
 let g:closetag_filetypes = 'html,xhtml,phtml,javascript,typescript'
@@ -179,6 +207,10 @@ let g:tex_flavor = 'latex'
 
 let g:vimtex_view_method = 'zathura'
 
+" vim-airline powerline integration
+let g:airline_powerline_fonts = 1
+let g:airline_detect_spell=1
+let g:airline#extensions#branch#format = 2
 " ====  React JSX syntax highlighting for vim and Typescript  ====
 " set filetypes as typescriptreact
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
@@ -200,146 +232,5 @@ set dictionary+=/usr/share/dict/spanish,/usr/share/dict/words
 
 " ====  Lua config "
 lua << EOF
--- Telescope configuration
-local telescope = require("telescope")
-local telescope_actions = require('telescope.actions')
-telescope.setup {
-  defaults = {
-    file_ignore_patterns = {"node_modules", ".git"},
-    path_display = {"smart"},
-    dynamic_preview_title = true,
-    mappings = {
-      i = {
-        ["<esc>"] = telescope_actions.close
-      },
-    },
-  },
-  pickers = {
-    find_files = {
-      theme = "dropdown",
-    },
-    live_grep = {
-      theme = "dropdown",
-    },
-    buffers = {
-      theme = "dropdown",
-    },
-    help_tags = {
-      theme = "dropdown",
-    },
-    oldfiles = {
-      theme = "dropdown",
-    },
-  },
-}
-vim.o.completeopt = "menuone,noselect"
-vim.o.background = "dark"
-
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  },
-}
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-
-  buf_set_keymap('n', 'gs', '<Cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<C-p>', '<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', '<C-n>', '<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
-end
-
-local nvim_lsp = require('lspconfig')
-local cmp_nvim_lsp = require('cmp_nvim_lsp')
-vim.lsp.set_log_level("debug")
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp', 'svelte', 'tsserver', 'cssls', 'bashls' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    capabilities = cmp_nvim_lsp.update_capabilities(capabilities),
-    flags = {
-      debounce_text_changes = 150,
-      }
-    }
-end
-
-nvim_lsp.html.setup{
-  on_attach = on_attach,
-  capabilities = cmp_nvim_lsp.update_capabilities(capabilities),
-  filetypes = { "html", "htmldjango", "jinja.html" },
-}
-
-require('nlua.lsp.nvim').setup(nvim_lsp, {
-  on_attach = on_attach,
-
-  -- Include globals you want to tell the LSP are real :)
-  globals = {
-    -- Colorbuddy
-    "Color", "c", "Group", "g", "s",
-  }
-})
-
--- nvim-cmp setup
-local cmp = require 'cmp'
-cmp.setup {
-  preselect = false,
-  snippet = {
-    expand = function(args)
-      -- For `vsnip` user.
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
-    end,
-  },
-  mapping = {
-    ['<C-s>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-h>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'path' },
-    --{
-     -- name = "dictionary",
-      --keyword_length = 2,
-    --},
-  },
-}
-
+require("init_config")
 EOF
